@@ -28,7 +28,7 @@ const VideoPlayer = () => {
 			setvideoDetails(videoData.data.items[0]);
 		};
 		getVideoData();
-	}, [videoCtx.videoID, currentVideoID]);
+	}, [videoCtx.videoID, currentVideoID, topVideo]);
 
 	return (
 		<>
