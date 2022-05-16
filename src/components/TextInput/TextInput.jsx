@@ -8,6 +8,7 @@ const TextInput = ({
 	isPassword = false,
 	value = "",
 	onChangeFunc,
+	Inputstyles,
 }) => {
 	const [isPasswordVisible, toggleVisibility] = useState(!isPassword);
 
@@ -17,6 +18,7 @@ const TextInput = ({
 				{iconSrc !== "" ? <img src={iconSrc} className="icon" alt="" /> : null}
 				<p>{isPasswordVisible}</p>
 				<input
+					style={Inputstyles}
 					className="textInput"
 					type={isPasswordVisible ? "text" : "password"}
 					placeholder={placeholder}

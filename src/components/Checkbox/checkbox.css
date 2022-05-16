@@ -9,3 +9,9 @@
 	width: 28px;
 	height: 28px;
 }
+.CheckBoxHolder {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 10px;
+}

@@ -18,6 +18,7 @@ const authSlice = createSlice({
 		},
 		signOut: (state) => {
 			state.signedIn = false;
+			localStorage.removeItem("loginMail");
 		},
 		rememberMe: (state) => {
 			state.rememberMe = !state.rememberMe;

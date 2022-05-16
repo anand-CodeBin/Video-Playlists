@@ -42,12 +42,14 @@ const AddtoPlaylistMenu = (title = "") => {
 	};
 
 	const createplaylist = () => {
-		toggleNewplaylistSelected(false);
-		dispatch(
-			createPlaylist({
-				title: newPlaylistTitle,
-			})
-		);
+		if (newPlaylistTitle !== "") {
+			toggleNewplaylistSelected(false);
+			dispatch(
+				createPlaylist({
+					title: newPlaylistTitle,
+				})
+			);
+		}
 	};
 
 	if (!menuState.visible || menuState.videoInProcess == null) return null;
@@ -55,32 +57,40 @@ const AddtoPlaylistMenu = (title = "") => {
 		<div className="menuParent">
 			<div className="MenuHolder">
 				<h1>{menuState.videoInProcess.title} </h1>
-				{playlistsData.playlists.map((data, index) => {
-					return (
-						<div className="playlistOption">
-							<CheckBox
-								key={index}
-								label={data.title}
-								onChangeFunc={addToPlaylistHandle}
-								extraPropsForCB={index}
-							/>
-						</div>
-					);
-				})}
+				<div className="playlistOptionsHolder">
+					{playlistsData.playlists.map((data, index) => {
+						return (
+							<div className="playlistOption">
+								<CheckBox
+									key={index}
+									label={data.title}
+									onChangeFunc={addToPlaylistHandle}
+									extraPropsForCB={index}
+								/>
+							</div>
+						);
+					})}
+				</div>
 
 				{newplaylistSelected ? (
 					<>
-						<TextInput
-							placeholder={"Title"}
-							value={newPlaylistTitle}
-							onChangeFunc={setnewPlaylistTitle}
-						/>
-						<Button
-							Text="Create Playlist"
-							TextColor="#fff"
-							ButtonColor="#EA3946"
-							onClickHandler={createplaylist}
-						/>
+						<div className="createPlaylistInputHolder">
+							<TextInput
+								Inputstyles={{
+									borderBottom: "2px solid black",
+									outlineColor: "red",
+								}}
+								placeholder={"Title"}
+								value={newPlaylistTitle}
+								onChangeFunc={setnewPlaylistTitle}
+							/>
+							<Button
+								Text="Create Playlist"
+								TextColor="#fff"
+								ButtonColor="#EA3946"
+								onClickHandler={createplaylist}
+							/>
+						</div>
 					</>
 				) : (
 					<p
@@ -96,6 +106,14 @@ const AddtoPlaylistMenu = (title = "") => {
 					TextColor="#fff"
 					ButtonColor="#EA3946"
 					onClickHandler={closeMenu}
+				/>
+				<Button
+					Text="Cancel"
+					TextColor="#838383"
+					ButtonColor="#fff"
+					onClickHandler={closeMenu}
+					outline={true}
+					AdditionalClasses={"noOutline"}
 				/>
 			</div>
 		</div>

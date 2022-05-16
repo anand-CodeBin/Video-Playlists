@@ -42,7 +42,12 @@ const VideoCard = ({
 				<img className="thumb" alt="" src={thumbnail} onClick={playVideo} />
 				<p>{title}</p>
 				<p>
-					{views} Views
+					{views > 1000000
+						? Math.round(views / 1000000) + " M "
+						: views > 1000
+						? Math.round(views / 1000) + " K "
+						: views + " "}
+					Views
 					<span
 						className="AddtoPlaylist"
 						onClick={(e) => {

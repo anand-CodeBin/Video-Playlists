@@ -28,14 +28,13 @@ const PlayList = ({ videos, title }) => {
 	return (
 		<>
 			<div className="playlistHolder">
-				<div className="titleDiv">
+				<div className="titleDiv" onClick={() => handleArrowClick()}>
 					<p className="PlayListTitle">{title}</p>
 					<img
 						src={arrow}
 						alt=""
 						className="arrow"
 						style={playlistVisible ? {} : { transform: "rotateZ(180deg)" }}
-						onClick={() => handleArrowClick()}
 					/>
 				</div>
 				{playlistVisible ? (

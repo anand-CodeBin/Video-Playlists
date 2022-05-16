@@ -6,6 +6,8 @@ const Button = ({
 	ButtonColor = "#ffffff",
 	TextColor = "#000000",
 	onClickHandler,
+	outline = false,
+	AdditionalClasses,
 }) => {
 	const styles = {
 		backgroundColor: ButtonColor,
@@ -13,7 +15,11 @@ const Button = ({
 	};
 	return (
 		<>
-			<button className="buttonClass" style={styles} onClick={onClickHandler}>
+			<button
+				className={"buttonClass " + AdditionalClasses}
+				style={styles}
+				onClick={onClickHandler}
+			>
 				{Text}
 			</button>
 		</>
