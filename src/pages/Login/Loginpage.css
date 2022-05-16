@@ -1,0 +1,46 @@
+.logo {
+	width: 297.14px;
+	height: 48px;
+}
+
+.mainHolderDiv {
+	position: absolute;
+	width: 599px;
+	height: 505px;
+	/* left: 456px;
+	top: 244px; */
+
+	background: #ffffff;
+	border-radius: 8px;
+}
+
+.bodyDiv {
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.wrongCreds {
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 36px;
+}
+.invalidUser {
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 36px;
+}
+.warningHolder {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 8px 12px;
+	gap: 8px;
+}

@@ -1,0 +1,24 @@
+.PlayListTitle {
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 36px;
+}
+
+.arrow {
+	height: 28px;
+	width: 28px;
+	margin-left: 15vw;
+}
+
+.titleDiv {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.playlistHolder {
+	margin-left: 5vw;
+	width: 200px;
+}

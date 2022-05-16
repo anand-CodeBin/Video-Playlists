@@ -1,0 +1,18 @@
+.videoPlayerHolder {
+	padding-bottom: 50px;
+	border-bottom: 2px solid black;
+}
+.likeCountHolder {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.thumbsUp {
+	width: 28px;
+	height: 28px;
+	margin-right: 10px;
+}
+.videoPlayer {
+	width: 60vw;
+	height: 33.75vw;
+}

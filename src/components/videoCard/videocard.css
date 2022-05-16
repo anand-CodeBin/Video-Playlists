@@ -1,0 +1,18 @@
+.thumb {
+	object-fit: cover;
+	width: 25vw;
+	height: 14.06vw;
+	cursor: pointer;
+}
+
+.AddtoPlaylist {
+	font-size: 2rem;
+	cursor: pointer;
+	float: right;
+}
+
+.videoCard {
+	width: 25vw;
+	border-radius: 5px;
+	padding: 20px;
+}

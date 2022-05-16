@@ -1,0 +1,30 @@
+.MenuHolder {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 48px 46px;
+	gap: 16px;
+	position: absolute;
+	background-color: white;
+	margin: 50vh 0 0 50vw;
+	transform: translate(-50%, -50%);
+}
+
+.menuParent {
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.createplaylistOption {
+	cursor: pointer;
+}
+.playlistOption {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5vw;
+}

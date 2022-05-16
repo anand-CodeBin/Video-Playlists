@@ -1,0 +1,44 @@
+.textInput {
+	width: 328px;
+	height: 36px;
+
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 36px;
+}
+
+.mainHolder {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 18px 24px;
+	gap: 10px;
+
+	width: 440px;
+	height: 72px;
+
+	background: #f2f2f2;
+	border-radius: 10px;
+}
+
+.icon {
+	width: 24px;
+	height: 28px;
+
+	font-family: "Font Awesome 5 Free";
+	font-style: normal;
+	font-weight: 900;
+	font-size: 24px;
+	line-height: 28px;
+
+	/* identical to box height */
+
+	color: #cccccc;
+}
+
+.eye {
+	width: 27px;
+	height: 28px;
+}
