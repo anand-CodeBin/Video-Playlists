@@ -16,6 +16,7 @@ const VideoPlayer = () => {
 		(state) => state?.rootReducer?.api?.recommendedVideos[0]?.id
 	);
 	useEffect(() => {
+		console.log(topVideo);
 		if (videoCtx.videoID === "") {
 			setcurrentVideoID(topVideo);
 		} else {
