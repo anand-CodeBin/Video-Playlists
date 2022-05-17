@@ -43,7 +43,7 @@ const LoginPage = () => {
 		dispatch(rememberMe(value));
 	};
 	const signInHandle = () => {
-		if (inputPass === "123" && inputEmail !== "") {
+		if (inputPass === "123" && inputEmail !== "" && invalidMail === false) {
 			dispatch(signIn(inputEmail));
 		} else {
 			updateWrongCredentials(true);
