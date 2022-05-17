@@ -1,17 +1,27 @@
 .logo {
 	width: 297.14px;
 	height: 48px;
+	margin: 5vh 0;
 }
 
 .mainHolderDiv {
 	position: absolute;
 	width: 599px;
-	height: 505px;
+	height: 75vh;
+	padding-top: 5vh;
 	/* left: 456px;
 	top: 244px; */
 
 	background: #ffffff;
 	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.RememberMeHolder {
+	width: 30vw;
+	padding: 1vh 0;
 }
 
 .bodyDiv {
@@ -51,4 +61,9 @@
 .loginPageIcon {
 	color: #cccccc;
 	height: 28px;
+}
+.errMsgBelowInput {
+	width: 30vw;
+	padding-left: 7vw;
+	min-height: 20px;
 }

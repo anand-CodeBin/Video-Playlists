@@ -44,3 +44,10 @@
 .withoutOutLine {
 	outline: none;
 }
+.MenuWarning {
+	width: 440px;
+	height: 28px;
+}
+.MenuWarning p {
+	margin: 0%;
+}

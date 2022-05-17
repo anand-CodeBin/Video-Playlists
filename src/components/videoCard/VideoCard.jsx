@@ -1,3 +1,5 @@
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import "./videocard.css";
 
@@ -19,11 +21,13 @@ const VideoCard = ({
 			/>
 			<p>{videoMetaData.title}</p>
 			<p>
+				<FontAwesomeIcon icon={faEye} />
+				{"  "}
 				{videoMetaData.views > 1000000
 					? Math.round(videoMetaData.views / 1000000) + "M "
 					: videoMetaData.views > 1000
 					? Math.round(videoMetaData.views / 1000) + "K "
-					: videoMetaData.views + " "}
+					: videoMetaData.views + "  "}
 				Views
 				<span
 					className="AddtoPlaylist"

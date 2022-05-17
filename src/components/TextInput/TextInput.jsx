@@ -7,8 +7,10 @@ const TextInput = ({
 	icon = null,
 	isPassword = false,
 	value = "",
-	onChangeFunc,
+	onChangeFunc = () => {},
 	Inputstyles,
+	onKeyPressFunc = () => {},
+	autoFocus = false,
 }) => {
 	const [isPasswordVisible, toggleVisibility] = useState(!isPassword);
 
@@ -18,6 +20,7 @@ const TextInput = ({
 				{icon}
 				<p>{isPasswordVisible}</p>
 				<input
+					autoFocus={autoFocus}
 					style={Inputstyles}
 					className="textInput"
 					type={isPasswordVisible ? "text" : "password"}
@@ -26,6 +29,7 @@ const TextInput = ({
 					onChange={(e) => {
 						onChangeFunc(e.target.value);
 					}}
+					onKeyDown={(e) => onKeyPressFunc(e)}
 				/>
 				{isPassword ? (
 					<FontAwesomeIcon

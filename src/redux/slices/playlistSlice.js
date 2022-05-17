@@ -28,6 +28,13 @@ const playlistSlice = createSlice({
 			let PlaylistVideos = [...state.playlists[action.payload.index].videos];
 			if (!PlaylistVideos.includes(ID)) {
 				PlaylistVideos.push(ID);
+			} else {
+				let tempPlaylist = [];
+				tempPlaylist = [
+					...PlaylistVideos.slice(0, PlaylistVideos.indexOf(ID)),
+					...PlaylistVideos.slice(PlaylistVideos.indexOf(ID) + 1),
+				];
+				PlaylistVideos = tempPlaylist;
 			}
 			state.playlists[action.payload.index].videos = PlaylistVideos;
 		},

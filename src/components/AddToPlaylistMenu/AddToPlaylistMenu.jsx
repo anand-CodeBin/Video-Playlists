@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	addToPlaylist,
@@ -16,6 +16,7 @@ const AddtoPlaylistMenu = (title = "") => {
 	const dispatch = useDispatch();
 	const [newPlaylistTitle, setnewPlaylistTitle] = useState("");
 	const [newplaylistSelected, toggleNewplaylistSelected] = useState(false);
+	const [createBtnEnabled, togglecreateBtnEnabled] = useState(false);
 	const menuState = useSelector(
 		(state) => state.rootReducer.playlists.playlistMenuState
 	);
@@ -36,6 +37,7 @@ const AddtoPlaylistMenu = (title = "") => {
 	};
 
 	const closeMenu = () => {
+		toggleNewplaylistSelected(false);
 		dispatch(
 			updateMenuState({
 				visible: false,
@@ -44,17 +46,21 @@ const AddtoPlaylistMenu = (title = "") => {
 	};
 
 	const createplaylist = () => {
-		if (newPlaylistTitle !== "") {
+		if (createBtnEnabled) {
 			toggleNewplaylistSelected(false);
 			dispatch(
 				createPlaylist({
-					title: newPlaylistTitle,
+					title: newPlaylistTitle.trim(),
 				})
 			);
 		}
 	};
-
+	const createNewPlaylistSelected = () => {
+		toggleNewplaylistSelected(true);
+		setnewPlaylistTitle("");
+	};
 	const confirmUpdate = () => {
+		toggleNewplaylistSelected(false);
 		dispatch(confirmUpdatePlaylists());
 		closeMenu();
 	};
@@ -63,6 +69,17 @@ const AddtoPlaylistMenu = (title = "") => {
 		closeMenu();
 	};
 
+	useEffect(() => {
+		if (newPlaylistTitle !== "") {
+			const DuplicateTitle = (obj) => obj.title === newPlaylistTitle;
+			if (playlistsData.playlists.some(DuplicateTitle)) {
+				togglecreateBtnEnabled(false);
+			} else {
+				togglecreateBtnEnabled(true);
+			}
+		}
+	}, [newPlaylistTitle]);
+
 	if (!menuState.visible || menuState.videoInProcess == null) return null;
 	return (
 		<div className="menuParent">
@@ -70,12 +87,18 @@ const AddtoPlaylistMenu = (title = "") => {
 				<h1>{menuState.videoInProcess.title} </h1>
 				<div className="playlistOptionsHolder">
 					{playlistsData.playlists.map((data, index) => {
+						data.videos.includes(menuState.videoInProcess.ID);
 						return (
 							<div className="playlistOption" key={index + data.title}>
 								<CheckBox
 									label={data.title}
 									onChangeFunc={addToPlaylistHandle}
 									extraPropsForCB={index}
+									checked={
+										data.videos.includes(menuState.videoInProcess.ID)
+											? true
+											: false
+									}
 								/>
 							</div>
 						);
@@ -93,11 +116,19 @@ const AddtoPlaylistMenu = (title = "") => {
 								placeholder={"Title"}
 								value={newPlaylistTitle}
 								onChangeFunc={setnewPlaylistTitle}
+								autoFocus={true}
 							/>
+							<div className="MenuWarning">
+								<p>
+									{createBtnEnabled
+										? ""
+										: `Playlist named ${newPlaylistTitle} already exists.`}
+								</p>
+							</div>
 							<Button
 								Text="Create Playlist"
-								TextColor="#fff"
-								ButtonColor="#EA3946"
+								TextColor={createBtnEnabled ? "#fff" : "#000"}
+								ButtonColor={createBtnEnabled ? "#EA3946" : "#e5e5e5"}
 								onClickHandler={createplaylist}
 							/>
 						</div>
@@ -105,7 +136,7 @@ const AddtoPlaylistMenu = (title = "") => {
 				) : (
 					<p
 						className="createplaylistOption"
-						onClick={(e) => toggleNewplaylistSelected(true)}
+						onClick={(e) => createNewPlaylistSelected()}
 					>
 						+ Create Playlist
 					</p>

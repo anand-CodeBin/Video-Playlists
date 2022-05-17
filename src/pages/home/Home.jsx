@@ -15,7 +15,8 @@ const HomePage = () => {
 	const PlaylistsData = useSelector((state) => state.rootReducer.playlists);
 
 	useEffect(() => {
-		if (!isLoggedIn) {
+		const loggedInAs = localStorage.getItem("logged_in_as");
+		if (!isLoggedIn || loggedInAs === null) {
 			navigate("/");
 		}
 	}, [isLoggedIn, navigate]);
@@ -38,6 +39,7 @@ const HomePage = () => {
 										<PlayList
 											videos={data.videos}
 											title={data.title}
+											index={index}
 											key={index}
 										/>
 									);

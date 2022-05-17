@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { VideoContext } from "../../contexts/VideoPlayerContext/videoPlayerContext";
 import axios from "axios";
-import thumbsUp from "../../assets/icons/thumbs-up.png";
 import "./videoplayer.css";
 import { useSelector } from "react-redux";
 import { URL_LoadVideosData } from "../../utils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
 const VideoPlayer = () => {
 	const videoCtx = useContext(VideoContext);
@@ -23,9 +24,11 @@ const VideoPlayer = () => {
 			setcurrentVideoID(videoCtx.videoID);
 		}
 		const getVideoData = async () => {
-			let APIcallUrl = URL_LoadVideosData + `&id=${currentVideoID}`;
-			const videoData = await axios.get(APIcallUrl);
-			setvideoDetails(videoData.data.items[0]);
+			try {
+				let APIcallUrl = URL_LoadVideosData + `&id=${currentVideoID}`;
+				const videoData = await axios.get(APIcallUrl);
+				setvideoDetails(videoData.data.items[0]);
+			} catch {}
 		};
 		getVideoData();
 	}, [videoCtx.videoID, currentVideoID, topVideo]);
@@ -42,18 +45,11 @@ const VideoPlayer = () => {
 				></iframe>
 				{videoDetails !== undefined ? (
 					<>
-						{/* <p>
-							{" "}
-							{videoDetails.statistics.viewCount
-								.toString()
-								.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
-							Views
-						</p> */}
 						<div style={{ maxWidth: "60vw" }}>
 							<p className="VideoPlayerTitle">{videoDetails.snippet.title}</p>
 						</div>
 						<div className="likeCountHolder">
-							<img className="thumbsUp" src={thumbsUp} alt="thumbs up" />
+							<FontAwesomeIcon icon={faThumbsUp} className="thumbsUp" />
 							<p>
 								{videoDetails.statistics.likeCount
 									.toString()

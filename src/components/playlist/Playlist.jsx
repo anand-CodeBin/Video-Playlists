@@ -6,10 +6,14 @@ import { URL_LoadVideosData } from "../../utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import "./playlist.css";
+import { useSelector } from "react-redux";
 
-const PlayList = ({ videos, title }) => {
+const PlayList = ({ videos, title, index }) => {
 	const [playlistVisible, toggleplaylistVisible] = useState(false);
 	const [playlistData, updatePlaylistData] = useState([]);
+	const playlistVideos = useSelector(
+		(state) => state.rootReducer.playlists.playlists[index].videos
+	);
 
 	const handleArrowClick = () => {
 		toggleplaylistVisible(!playlistVisible);
@@ -24,20 +28,24 @@ const PlayList = ({ videos, title }) => {
 
 	useEffect(() => {
 		let videosAPIcallSuffix = "";
-		videos.map((data, index) => {
-			videosAPIcallSuffix += `&id=${data}`;
+		playlistVideos.map((id, index) => {
+			videosAPIcallSuffix += `&id=${id}`;
 			return null;
 		});
 		const getPlaylistData = async () => {
 			try {
-				let APIcallUrl = URL_LoadVideosData + videosAPIcallSuffix;
-				const APIresponse = await axios.get(APIcallUrl);
-				updatePlaylistData(APIresponse.data);
+				if (playlistVideos.length > 0) {
+					let APIcallUrl = URL_LoadVideosData + videosAPIcallSuffix;
+					const APIresponse = await axios.get(APIcallUrl);
+					updatePlaylistData(APIresponse.data);
+				} else {
+					updatePlaylistData([]);
+				}
 			} catch {}
 		};
 
 		getPlaylistData();
-	}, [videos]);
+	}, [playlistVideos]);
 	return (
 		<>
 			<div className="playlistHolder">
@@ -52,7 +60,8 @@ const PlayList = ({ videos, title }) => {
 					<>
 						{playlistData.items === undefined
 							? null
-							: playlistData.items.map((data, index) => {
+							: playlistData.items.length > 0
+							? playlistData.items.map((data, index) => {
 									const videoMetaData = {
 										ID: data.id,
 										title: data.snippet.title,
@@ -68,7 +77,8 @@ const PlayList = ({ videos, title }) => {
 											thumbnailClickHandleProps={videoMetaData.ID}
 										/>
 									);
-							  })}
+							  })
+							: null}
 					</>
 				) : null}
 			</div>
