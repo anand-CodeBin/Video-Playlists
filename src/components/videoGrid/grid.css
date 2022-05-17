@@ -2,3 +2,8 @@
 	display: grid;
 	grid-template-columns: auto auto;
 }
+
+.loader {
+	height: 28px;
+	margin-left: 25vw;
+}

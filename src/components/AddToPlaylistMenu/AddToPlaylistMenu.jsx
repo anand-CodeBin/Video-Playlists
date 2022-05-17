@@ -4,6 +4,8 @@ import {
 	addToPlaylist,
 	updateMenuState,
 	createPlaylist,
+	confirmUpdatePlaylists,
+	cancelUpdatePlaylists,
 } from "../../redux/slices/playlistSlice";
 import Button from "../Button/Button";
 import CheckBox from "../Checkbox/Checkbox";
@@ -50,6 +52,15 @@ const AddtoPlaylistMenu = (title = "") => {
 				})
 			);
 		}
+	};
+
+	const confirmUpdate = () => {
+		dispatch(confirmUpdatePlaylists());
+		closeMenu();
+	};
+	const cancelUpdate = () => {
+		dispatch(cancelUpdatePlaylists());
+		closeMenu();
 	};
 
 	if (!menuState.visible || menuState.videoInProcess == null) return null;
@@ -105,13 +116,13 @@ const AddtoPlaylistMenu = (title = "") => {
 					Text="Done"
 					TextColor="#fff"
 					ButtonColor="#EA3946"
-					onClickHandler={closeMenu}
+					onClickHandler={confirmUpdate}
 				/>
 				<Button
 					Text="Cancel"
 					TextColor="#838383"
 					ButtonColor="#fff"
-					onClickHandler={closeMenu}
+					onClickHandler={cancelUpdate}
 					outline={true}
 					AdditionalClasses={"noOutline"}
 				/>

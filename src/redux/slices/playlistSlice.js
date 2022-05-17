@@ -1,16 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const InitialState = {
-	playlists: [
-		{
-			title: "My First Playlist",
-			videos: ["tgB1wUcmbbw", "8bpZg8V3Onk"],
-		},
-	],
+	playlists: [],
 	playlistMenuState: {
 		visible: false,
 		videoInProcess: null,
 	},
+	tempPlaylists: null,
 };
 
 const InitialPlaylistState = {
@@ -28,17 +24,23 @@ const playlistSlice = createSlice({
 			state.playlists.push(newPlaylist);
 		},
 		addToPlaylist: (state, action) => {
-			if (
-				!state.playlists[action.payload.index].videos.includes(
-					state.playlistMenuState.videoInProcess.ID
-				)
-			) {
-				state.playlists[action.payload.index].videos.push(
-					state.playlistMenuState.videoInProcess.ID
-				);
+			const ID = state.playlistMenuState.videoInProcess.ID;
+			let PlaylistVideos = [...state.playlists[action.payload.index].videos];
+			if (!PlaylistVideos.includes(ID)) {
+				PlaylistVideos.push(ID);
+			} else {
+				PlaylistVideos.splice(PlaylistVideos.indexOf(ID), 1);
 			}
+			state.playlists[action.payload.index].videos = PlaylistVideos;
+		},
+		confirmUpdatePlaylists: (state) => {
+			state.tempPlaylists = null;
+		},
+		cancelUpdatePlaylists: (state) => {
+			state.playlists = state.tempPlaylists;
 		},
 		updateMenuState: (state, action) => {
+			state.tempPlaylists = state.playlists;
 			state.playlistMenuState.visible = action.payload.visible;
 			state.playlistMenuState.videoInProcess = action.payload.videoData;
 		},
@@ -57,6 +59,8 @@ export const {
 	addToPlaylist,
 	updateMenuState,
 	clearPlaylists,
+	confirmUpdatePlaylists,
+	cancelUpdatePlaylists,
 } = playlistSlice.actions;
 
 export default playlistSlice.reducer;

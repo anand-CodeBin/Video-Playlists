@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./TextInput.css";
-import eyeIcon from "../../assets/icons/eye.png";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 const TextInput = ({
 	placeholder,
-	iconSrc = "",
+	icon = null,
 	isPassword = false,
 	value = "",
 	onChangeFunc,
@@ -15,7 +15,7 @@ const TextInput = ({
 	return (
 		<>
 			<div className="mainHolder">
-				{iconSrc !== "" ? <img src={iconSrc} className="icon" alt="" /> : null}
+				{icon}
 				<p>{isPasswordVisible}</p>
 				<input
 					style={Inputstyles}
@@ -28,13 +28,18 @@ const TextInput = ({
 					}}
 				/>
 				{isPassword ? (
-					<img
+					<FontAwesomeIcon
+						icon={isPasswordVisible ? faEye : faEyeSlash}
+						onClick={() => toggleVisibility(!isPasswordVisible)}
+						className="eye"
+					/>
+				) : /* 					<img
 						src={eyeIcon}
 						className="eye"
 						alt=""
 						onClick={() => toggleVisibility(!isPasswordVisible)}
-					/>
-				) : null}
+					/> */
+				null}
 			</div>
 		</>
 	);

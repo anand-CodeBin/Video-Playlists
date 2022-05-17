@@ -1,14 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import VideoCard from "../videoCard/VideoCard";
 import arrow from "../../assets/icons/arrow.png";
 import "./playlist.css";
 import axios from "axios";
+import { VideoContext } from "../../contexts/VideoPlayerContext/videoPlayerContext";
+import { URL_LoadVideosData } from "../../utils";
 const PlayList = ({ videos, title }) => {
 	const [playlistVisible, toggleplaylistVisible] = useState(false);
 	const [playlistData, updatePlaylistData] = useState([]);
 
 	const handleArrowClick = () => {
 		toggleplaylistVisible(!playlistVisible);
+	};
+
+	const videoplayerContext = useContext(VideoContext);
+	const playVideo = (id) => {
+		videoplayerContext.updateVideoID(id);
 	};
 
 	useEffect(() => {
@@ -18,7 +25,7 @@ const PlayList = ({ videos, title }) => {
 			return null;
 		});
 		const getPlaylistData = async () => {
-			let APIcallUrl = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&${videosAPIcallSuffix}&key=AIzaSyD2KpYc1h0gQ8SGQMdMJTXvjL86sRanW6g`;
+			let APIcallUrl = URL_LoadVideosData + videosAPIcallSuffix;
 			const APIresponse = await axios.get(APIcallUrl);
 			updatePlaylistData(APIresponse.data);
 		};
@@ -42,24 +49,24 @@ const PlayList = ({ videos, title }) => {
 						{playlistData.items === undefined
 							? null
 							: playlistData.items.map((data, index) => {
+									const videoMetaData = {
+										ID: data.id,
+										title: data.snippet.title,
+										views: data.statistics.viewCount,
+										thumbnail: data.snippet.thumbnails.high.url,
+									};
 									return (
 										<>
 											<VideoCard
-												key={index}
-												id={data.id}
-												thumbnail={data.snippet.thumbnails.high.url}
+												key={data.id + index}
 												AddedInPlaylist={true}
-												title={data.snippet.title}
-												views={data.statistics.viewCount}
+												videoMetaData={videoMetaData}
+												thumbnailClickHandle={playVideo}
+												thumbnailClickHandleProps={videoMetaData.ID}
 											/>
 										</>
 									);
 							  })}
-						{/* 
-					<VideoCard />
-					<VideoCard />
-					<VideoCard />
-					<VideoCard /> */}
 					</>
 				) : null}
 			</div>

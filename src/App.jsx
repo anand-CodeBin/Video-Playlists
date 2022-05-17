@@ -1,4 +1,3 @@
-import "./App.css";
 import LoginPage from "./pages/Login/LoginPage";
 import store from "./redux/store";
 import { Provider } from "react-redux";

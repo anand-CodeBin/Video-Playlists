@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { URL_PopularVideos } from "../../utils";
 
 const InitialState = {
 	recommendedVideos: [],
 	status: "",
+	loading: false,
 };
 
 const apiSlice = createSlice({
@@ -13,13 +15,16 @@ const apiSlice = createSlice({
 	extraReducers: (builder) => {
 		builder.addCase(loadPopularVideos.pending, (state, action) => {
 			state.status = "Loading ...";
+			state.loading = true;
 		});
 		builder.addCase(loadPopularVideos.fulfilled, (state, action) => {
 			state.recommendedVideos = action.payload;
 			state.status = "";
+			state.loading = false;
 		});
 		builder.addCase(loadPopularVideos.rejected, (state, action) => {
 			state.status = "Failed.";
+			state.loading = false;
 		});
 	},
 });
@@ -27,9 +32,7 @@ const apiSlice = createSlice({
 export const loadPopularVideos = createAsyncThunk(
 	"LoadPopularVideo",
 	async (state) => {
-		const videos = await axios.get(
-			"https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=20&regionCode=US&key=AIzaSyD2KpYc1h0gQ8SGQMdMJTXvjL86sRanW6g"
-		);
+		const videos = await axios.get(URL_PopularVideos);
 
 		return videos.data.items;
 	}

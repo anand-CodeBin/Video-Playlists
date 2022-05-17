@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
 import TextInput from "../../components/TextInput/TextInput";
-import EmailIcon from "../../assets/icons/email.png";
-import PasswordIcon from "../../assets/icons/password.png";
 import CodebinLogo from "../../assets/logo/codebin.png";
 import CheckBox from "../../components/Checkbox/Checkbox";
 import Button from "../../components/Button/Button";
 import "./Loginpage.css";
-import jwtDecode from "jwt-decode";
 import { rememberMe, signIn } from "../../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 
 const LoginPage = () => {
-	const JWTToken =
-		"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY0BnbWFpbC5jb20iLCJwYXNzIjoiMTIzIn0.SATA4HHLXZDo7ix4hjepU7rPDET-Be3VrSOpGfBKCKs";
-	//"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY0BnbWFpbC5jb20ifQ.bLx7-Ji22xykgSslqxHfLH-l8fFiscsMqGkY7ffzZvU";
 	const [inputEmail, setInputEmail] = useState("");
 	const [inputPass, setInputPass] = useState("");
 	const [wrongCredentials, updateWrongCredentials] = useState(false);
@@ -57,15 +53,7 @@ const LoginPage = () => {
 	useEffect(() => {
 		const token = localStorage.getItem("loginMail");
 		if (token !== null) {
-			const decodedToken = jwtDecode(JWTToken);
-			if (
-				decodedToken.email === "abc@gmail.com" &&
-				decodedToken.pass === "123"
-			) {
-				dispatch(signIn(inputEmail));
-				navigate("/home");
-			}
-			setInputEmail(decodedToken.email);
+			setInputEmail(token);
 		}
 	}, [dispatch, navigate, inputEmail]);
 
@@ -82,13 +70,15 @@ const LoginPage = () => {
 					<img src={CodebinLogo} alt="" className="logo" />
 					<TextInput
 						placeholder="Email"
-						iconSrc={EmailIcon}
+						icon={
+							<FontAwesomeIcon icon={faEnvelope} className="loginPageIcon" />
+						}
 						value={inputEmail}
 						onChangeFunc={onChangeEmail}
 					/>
 					<TextInput
 						placeholder="Password"
-						iconSrc={PasswordIcon}
+						icon={<FontAwesomeIcon icon={faLock} className="loginPageIcon" />}
 						isPassword={true}
 						value={inputPass}
 						onChangeFunc={onChangePass}
