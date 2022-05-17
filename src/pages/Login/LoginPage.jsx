@@ -55,7 +55,7 @@ const LoginPage = () => {
 		if (token !== null) {
 			setInputEmail(token);
 		}
-	}, [dispatch, navigate, inputEmail]);
+	}, [dispatch, navigate]);
 
 	useEffect(() => {
 		if (isLoggedIn) {
