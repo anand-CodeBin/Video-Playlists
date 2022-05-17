@@ -71,9 +71,8 @@ const AddtoPlaylistMenu = (title = "") => {
 				<div className="playlistOptionsHolder">
 					{playlistsData.playlists.map((data, index) => {
 						return (
-							<div className="playlistOption">
+							<div className="playlistOption" key={index + data.title}>
 								<CheckBox
-									key={index + data.title}
 									label={data.title}
 									onChangeFunc={addToPlaylistHandle}
 									extraPropsForCB={index}
