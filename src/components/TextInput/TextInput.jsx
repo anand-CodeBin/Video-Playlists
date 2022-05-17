@@ -33,13 +33,7 @@ const TextInput = ({
 						onClick={() => toggleVisibility(!isPasswordVisible)}
 						className="eye"
 					/>
-				) : /* 					<img
-						src={eyeIcon}
-						className="eye"
-						alt=""
-						onClick={() => toggleVisibility(!isPasswordVisible)}
-					/> */
-				null}
+				) : null}
 			</div>
 		</>
 	);

@@ -41,5 +41,3 @@ const VideoCard = ({
 };
 
 export default VideoCard;
-
-// https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=AIzaSyD2KpYc1h0gQ8SGQMdMJTXvjL86sRanW6g

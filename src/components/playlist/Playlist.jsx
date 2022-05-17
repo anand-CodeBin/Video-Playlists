@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import VideoCard from "../videoCard/VideoCard";
-import arrow from "../../assets/icons/arrow.png";
-import "./playlist.css";
 import axios from "axios";
+import VideoCard from "../videoCard/VideoCard";
 import { VideoContext } from "../../contexts/VideoPlayerContext/videoPlayerContext";
 import { URL_LoadVideosData } from "../../utils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import "./playlist.css";
+
 const PlayList = ({ videos, title }) => {
 	const [playlistVisible, toggleplaylistVisible] = useState(false);
 	const [playlistData, updatePlaylistData] = useState([]);
@@ -37,11 +39,9 @@ const PlayList = ({ videos, title }) => {
 			<div className="playlistHolder">
 				<div className="titleDiv" onClick={() => handleArrowClick()}>
 					<p className="PlayListTitle">{title}</p>
-					<img
-						src={arrow}
-						alt=""
+					<FontAwesomeIcon
+						icon={playlistVisible ? faAngleUp : faAngleDown}
 						className="arrow"
-						style={playlistVisible ? {} : { transform: "rotateZ(180deg)" }}
 					/>
 				</div>
 				{playlistVisible ? (

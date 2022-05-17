@@ -5,6 +5,7 @@ import axios from "axios";
 import thumbsUp from "../../assets/icons/thumbs-up.png";
 import "./videoplayer.css";
 import { useSelector } from "react-redux";
+import { URL_LoadVideosData } from "../../utils";
 
 const VideoPlayer = () => {
 	const videoCtx = useContext(VideoContext);
@@ -22,7 +23,7 @@ const VideoPlayer = () => {
 			setcurrentVideoID(videoCtx.videoID);
 		}
 		const getVideoData = async () => {
-			let APIcallUrl = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${currentVideoID}&key=AIzaSyD2KpYc1h0gQ8SGQMdMJTXvjL86sRanW6g`;
+			let APIcallUrl = URL_LoadVideosData + `&id=${currentVideoID}`;
 			const videoData = await axios.get(APIcallUrl);
 			setvideoDetails(videoData.data.items[0]);
 		};

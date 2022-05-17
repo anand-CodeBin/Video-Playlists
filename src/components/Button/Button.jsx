@@ -6,7 +6,6 @@ const Button = ({
 	ButtonColor = "#ffffff",
 	TextColor = "#000000",
 	onClickHandler,
-	outline = false,
 	AdditionalClasses,
 }) => {
 	const styles = {

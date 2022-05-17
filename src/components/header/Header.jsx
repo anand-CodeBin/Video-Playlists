@@ -17,12 +17,6 @@ const Header = () => {
 		<>
 			<div className="headerDiv">
 				<img src={CodebinLogo} alt="CodeBinLogo" className="Headerlogo" />
-				{/* <img
-					src={logoutIcon}
-					alt="Log Out"
-					className="Headerlogout"
-					onClick={(e) => handleLogOut()}
-				/> */}
 				<button
 					className="Headerlogout"
 					onClick={(e) => handleLogOut()}
