@@ -27,9 +27,11 @@ const PlayList = ({ videos, title }) => {
 			return null;
 		});
 		const getPlaylistData = async () => {
-			let APIcallUrl = URL_LoadVideosData + videosAPIcallSuffix;
-			const APIresponse = await axios.get(APIcallUrl);
-			updatePlaylistData(APIresponse.data);
+			try {
+				let APIcallUrl = URL_LoadVideosData + videosAPIcallSuffix;
+				const APIresponse = await axios.get(APIcallUrl);
+				updatePlaylistData(APIresponse.data);
+			} catch {}
 		};
 
 		getPlaylistData();
@@ -56,15 +58,13 @@ const PlayList = ({ videos, title }) => {
 										thumbnail: data.snippet.thumbnails.high.url,
 									};
 									return (
-										<>
-											<VideoCard
-												key={data.id + index}
-												AddedInPlaylist={true}
-												videoMetaData={videoMetaData}
-												thumbnailClickHandle={playVideo}
-												thumbnailClickHandleProps={videoMetaData.ID}
-											/>
-										</>
+										<VideoCard
+											key={data.id + index}
+											AddedInPlaylist={true}
+											videoMetaData={videoMetaData}
+											thumbnailClickHandle={playVideo}
+											thumbnailClickHandleProps={videoMetaData.ID}
+										/>
 									);
 							  })}
 					</>
