@@ -17,7 +17,9 @@ const PlayList = ({ videos, title }) => {
 
 	const videoplayerContext = useContext(VideoContext);
 	const playVideo = (id) => {
-		videoplayerContext.updateVideoID(id);
+		if (videoplayerContext.videoID !== id) {
+			videoplayerContext.updateVideoID(id);
+		}
 	};
 
 	useEffect(() => {
