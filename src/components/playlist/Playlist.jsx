@@ -58,7 +58,7 @@ function PlayList({ title, index }) {
           className="arrow"
         />
       </div>
-      {playlistVisible
+      {playlistVisible && playlistData.items !== undefined 
         ? playlistData.items.map((data) => {
           const videoMetaData = {
             ID: data.id,
