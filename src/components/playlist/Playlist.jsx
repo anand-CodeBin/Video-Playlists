@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleUp, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import VideoCard from '../videoCard/VideoCard';
@@ -12,6 +12,7 @@ import './playlist.css';
 function PlayList({ title, index }) {
   const [playlistVisible, toggleplaylistVisible] = useState(false);
   const [playlistData, updatePlaylistData] = useState([]);
+	const [dataPending, setdataPending] = useState(true);
   const playlistVideos = useSelector(
     (state) => state.rootReducer.playlists.playlists[index].videos,
   );
@@ -37,18 +38,25 @@ function PlayList({ title, index }) {
       try {
         if (playlistVideos.length > 0) {
           const APIcallUrl = URLLoadVideosData + videosAPIcallSuffix;
+					setdataPending(true);
           const APIresponse = await axios.get(APIcallUrl);
           updatePlaylistData(APIresponse.data);
+					setdataPending(false);
         } else {
           updatePlaylistData([]);
+					setdataPending(false);
         }
       } catch {
         updatePlaylistData([]);
+				setdataPending(false);
       }
     };
 
     getPlaylistData();
   }, [playlistVideos]);
+	if(dataPending) return (
+		<FontAwesomeIcon icon={faSpinner} className="fa-spin loader" />
+	)
   return (
   	<div className="playlistHolder">
       <div className="titleDiv" onClick={() => handleArrowClick()} onKeyDown={() => handleArrowClick()} role="button" tabIndex={index}>
