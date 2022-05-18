@@ -7,7 +7,7 @@
 .mainHolderDiv {
 	position: absolute;
 	width: 599px;
-	height: 75vh;
+	min-height: 75vh;
 	padding-top: 5vh;
 	/* left: 456px;
 	top: 244px; */

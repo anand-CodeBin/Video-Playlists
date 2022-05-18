@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import VideoPlayer from "../../components/videoPlayer/VideoPlayer";
@@ -7,7 +7,7 @@ import PlayList from "../../components/playlist/Playlist";
 import "./home.css";
 import Grid from "../../components/videoGrid/VideoGrid";
 import AddtoPlaylistMenu from "../../components/AddToPlaylistMenu/AddToPlaylistMenu";
-import VideoContextProvider from "../../contexts/VideoPlayerContext/videoPlayerContext";
+import VideoContext from "../../contexts/VideoPlayerContext/videoPlayerContext";
 
 const HomePage = () => {
 	const navigate = useNavigate();
@@ -21,10 +21,20 @@ const HomePage = () => {
 		}
 	}, [isLoggedIn, navigate]);
 
+	const [videoID, setVideoID] = useState("");
+
+	const updateVideoID = (id) => {
+		setVideoID(id);
+	};
+
+	const value = useMemo(() => ({
+		videoID,
+		updateVideoID,
+	}),[videoID]);
+
+
 	return (
-		<>
-			<VideoContextProvider
-				children={
+			<VideoContext.Provider value={value}>
 					<>
 						<Header />
 						<div className="mainDiv">
@@ -34,22 +44,18 @@ const HomePage = () => {
 								<Grid />
 							</div>
 							<div>
-								{PlaylistsData.playlists.map((data, index) => {
-									return (
+								{PlaylistsData.playlists.map((data, index) => (
 										<PlayList
 											videos={data.videos}
 											title={data.title}
 											index={index}
-											key={index}
+											key={data.title}
 										/>
-									);
-								})}
+									))}
 							</div>
 						</div>
 					</>
-				}
-			/>
-		</>
+			</VideoContext.Provider>
 	);
 };
 

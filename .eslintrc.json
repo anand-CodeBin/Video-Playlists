@@ -1,0 +1,35 @@
+{
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "prettier",
+    "plugin:cypress/recommended"
+  ],
+  "rules": {
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "react/jsx-one-expression-per-line": [
+      "error",
+      {
+        "allow": "single-child"
+      }
+    ],
+    "react/function-component-definition": 0
+  },
+  "plugins": [
+    "prettier",
+    "react"
+  ],
+  "parser": "@babel/eslint-parser"
+}
