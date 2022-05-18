@@ -81,7 +81,8 @@ const LoginPage = () => {
 		if (loggedInAs !== null) {
 			dispatch(signIn(inputEmail));
 		}
-	}, [dispatch, navigate]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dispatch]);
 
 	useEffect(() => {
 		if (isLoggedIn) {
@@ -101,7 +102,7 @@ const LoginPage = () => {
 		} else {
 			togglesignInBtnEnabled(true);
 		}
-	}, [inputEmail, inputPass]);
+	}, [inputEmail, inputPass, invalidMail, invalidPassword]);
 
 	return (
 		<div className="bodyDiv" onKeyDown={(e) => handleEnterKey(e)}>

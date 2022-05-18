@@ -86,6 +86,7 @@ const AddtoPlaylistMenu = (title = "") => {
 				togglecreateBtnEnabled(false);
 			}
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [newPlaylistTitle]);
 
 	if (!menuState.visible || menuState.videoInProcess == null) return null;
