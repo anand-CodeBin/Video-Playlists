@@ -58,7 +58,7 @@ TextInput.defaultProps = {
   onChangeFunc: () => {},
   onKeyPressFunc: () => {},
   autoFocus: false,
-	value : ""
+	value: ""
 };
 
 export default TextInput;
