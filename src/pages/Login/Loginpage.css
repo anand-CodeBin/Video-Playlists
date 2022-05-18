@@ -20,7 +20,7 @@
 }
 
 .RememberMeHolder {
-	width: 30vw;
+	width: 25vw;
 	padding: 1vh 0;
 }
 
@@ -30,6 +30,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: #e5e5e5;
 }
 
 .wrongCreds {

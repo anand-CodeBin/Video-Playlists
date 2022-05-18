@@ -9,8 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
-import jwtDecode from "jwt-decode";
-import jwtEncode from "jwt-encode";
 
 const LoginPage = () => {
 	const [inputEmail, setInputEmail] = useState("");

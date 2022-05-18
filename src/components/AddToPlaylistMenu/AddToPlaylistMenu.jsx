@@ -17,6 +17,7 @@ const AddtoPlaylistMenu = (title = "") => {
 	const [newPlaylistTitle, setnewPlaylistTitle] = useState("");
 	const [newplaylistSelected, toggleNewplaylistSelected] = useState(false);
 	const [createBtnEnabled, togglecreateBtnEnabled] = useState(false);
+	const [duplicateTitle, setduplicateTitle] = useState(false);
 	const menuState = useSelector(
 		(state) => state.rootReducer.playlists.playlistMenuState
 	);
@@ -73,8 +74,10 @@ const AddtoPlaylistMenu = (title = "") => {
 		if (newPlaylistTitle !== "") {
 			const DuplicateTitle = (obj) => obj.title === newPlaylistTitle;
 			if (playlistsData.playlists.some(DuplicateTitle)) {
+				setduplicateTitle(false);
 				togglecreateBtnEnabled(false);
 			} else {
+				setduplicateTitle(true);
 				togglecreateBtnEnabled(true);
 			}
 		}
@@ -120,7 +123,7 @@ const AddtoPlaylistMenu = (title = "") => {
 							/>
 							<div className="MenuWarning">
 								<p>
-									{createBtnEnabled
+									{duplicateTitle
 										? ""
 										: `Playlist named ${newPlaylistTitle} already exists.`}
 								</p>
