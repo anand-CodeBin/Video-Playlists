@@ -156,7 +156,7 @@ const LoginPage = () => {
 				/>
 
 				{wrongCredentials ? (
-					<div className="warningHolder">
+					<div className="warningHolder ">
 						<p className="wrongCreds">Wrong credentials</p>
 						<p className="invalidUser">Invalid username or password</p>
 					</div>
