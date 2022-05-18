@@ -12,6 +12,7 @@ function TextInput({
   onChangeFunc = () => {},
   onKeyPressFunc = () => {},
   autoFocus = false,
+	value
 }) {
   const [isPasswordVisible, toggleVisibility] = useState(!isPassword);
 
@@ -25,6 +26,7 @@ function TextInput({
         onChange={(e) => {
           onChangeFunc(e.target.value);
         }}
+				value={value}
         autoFocus={autoFocus}
         onKeyDown={(e) => onKeyPressFunc(e)}
       />
@@ -47,6 +49,7 @@ TextInput.propTypes = {
   onChangeFunc: PropTypes.func,
   onKeyPressFunc: PropTypes.func,
   autoFocus: PropTypes.bool,
+	value: PropTypes.string
 };
 
 TextInput.defaultProps = {
@@ -55,6 +58,7 @@ TextInput.defaultProps = {
   onChangeFunc: () => {},
   onKeyPressFunc: () => {},
   autoFocus: false,
+	value : ""
 };
 
 export default TextInput;
