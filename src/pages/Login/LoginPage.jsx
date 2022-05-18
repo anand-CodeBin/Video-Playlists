@@ -104,7 +104,7 @@ const LoginPage = () => {
 	}, [inputEmail, inputPass]);
 
 	return (
-		<div className="bodyDiv">
+		<div className="bodyDiv" onKeyDown={(e) => handleEnterKey(e)}>
 			<div className="mainHolderDiv">
 				<img src={CodebinLogo} alt="" className="logo" />
 				<TextInput
@@ -116,7 +116,7 @@ const LoginPage = () => {
 					autoFocus={true}
 				/>
 				{invalidMail ? (
-					<div className="errMsgBelowInput">
+					<div className="errMsgBelowInput ">
 						<p style={{ margin: 0 }}>Invalid Email</p>
 					</div>
 				) : (

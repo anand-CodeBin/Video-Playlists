@@ -22,7 +22,6 @@ const VideoCard = ({
 			<p>{videoMetaData.title}</p>
 			<p>
 				<FontAwesomeIcon icon={faEye} />
-				{"  "}
 				{videoMetaData.views > 1000000
 					? Math.round(videoMetaData.views / 1000000) + "M "
 					: videoMetaData.views > 1000

@@ -80,6 +80,11 @@ const AddtoPlaylistMenu = (title = "") => {
 				setduplicateTitle(true);
 				togglecreateBtnEnabled(true);
 			}
+		} else {
+			if (newPlaylistTitle === "") {
+				setduplicateTitle(true);
+				togglecreateBtnEnabled(false);
+			}
 		}
 	}, [newPlaylistTitle]);
 
@@ -124,7 +129,7 @@ const AddtoPlaylistMenu = (title = "") => {
 							<div className="MenuWarning">
 								<p>
 									{duplicateTitle
-										? ""
+										? ``
 										: `Playlist named ${newPlaylistTitle} already exists.`}
 								</p>
 							</div>
