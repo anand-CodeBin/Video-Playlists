@@ -10,4 +10,4 @@ This will automatically open `http://localhost:3000` in your default browser.
 Use the following credentials to login  
   
 Email : abc@gmail.com  
-Password : 123  
+Password : Password1!  
